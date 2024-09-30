@@ -1,0 +1,228 @@
+
+:root{
+    --color-primary: #6027ff;
+    --color-danger: #26008f;
+    --color-success: #1B9C85;
+    --color-warning: #F7D060;
+    --color-white: #fff;
+    --color-info-dark: #7d8da1;
+    --color-dark: #140c29;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-dark-variant: #e6e3e9;
+    --color-background: #f6f6f9;
+
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1: 1.2rem;
+
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+body {
+    font-family: "Inter", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+}
+header {
+    background-color: var(--color-background);
+    font-family: "Inter", sans-serif;
+    font-size: 1.5em;
+    font-weight: 900;
+    color: var(--color-danger);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    
+}
+
+h1{
+    font-weight: 900;
+}
+.navbar {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+.main{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2%;
+    display: flex; 
+    flex-wrap: wrap;
+   
+}
+.main button{
+    width: 15%;
+    height: 40px;
+    text-align: center;
+    border-radius: 5px; 
+    border: none;
+    background-color: #5664b8;
+    color: #ddd;
+    gap: 20px;
+    flex-wrap: wrap;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    gap: 20px;
+    font-size: 15px;
+    font-family: inherit;
+    margin: 10px;
+    
+}
+
+button::before {
+    content: '';
+    width: 0em;
+    height: 3em;
+    border-radius: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #140c29 0%, #140c29 100%);
+    transition: .5s ease;
+    display: block;
+    z-index: -1;
+    
+}
+   
+button:hover::before {
+    width: 16em;
+}
+img{
+    max-width: 100%;
+}
+#receitas-list {
+    display: flex;
+    flex: 1 1 200px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 5%;
+ 
+}
+.flex {  
+    display: flex;/* Dispor os itens em linha */
+    justify-content: space-between;/* Espaçamento entre os cards */
+    flex-wrap: wrap;/* Faz os itens quebrarem linha se não couberem */
+    gap: 10px;/* Espaçamento entre os cards */
+    margin: 0 auto;
+    
+}
+.card {
+    margin: 15px;          /* Faz com que os cards se expandam igualmente */
+    flex-wrap: wrap;        /* Define a largura mínima dos cards */
+    max-width: 250px;           /* Define uma largura máxima */
+    background-color: #bbbbbbd8; /* Cor de fundo dos cards */
+    padding: 2px;             /* Espaçamento interno */
+    border-radius: 20px;      
+    text-align: center;
+}
+
+.card > h3 {
+    font-weight: 800;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+}
+
+.card > button{
+    background-color: #5664b8;
+    border-radius: 20px;
+    border: none;
+    color: #ffffff;
+    width: 90px;
+    height: 30px;
+  
+}
+
+.detalhes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ajusta a altura do contêiner */
+    text-align: center;
+    padding-top: 0px ;
+}
+
+#detalhes-receita.detalhes {
+    margin: 15px;          /* Faz com que os cards se expandam igualmente */
+    flex-wrap: wrap;        /* Define a largura mínima dos cards */
+    max-width: 600px;           /* Define uma largura máxima */
+    background-color: #bbbbbbd8; /* Cor de fundo dos cards */
+    padding: 2px;             /* Espaçamento interno */
+    border-radius: 20px;      
+    text-align: center;
+    justify-content: center;
+}
+
+h2#nome-receita{
+    width: 100%;
+    font-size: 1.2rem;
+    font-weight: 800;
+    background-color: #9c4cec22;    
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    color: var(--color-primary);
+}
+
+p#ingredientes-receita, p#modo-preparo-receita{
+    text-align: justify;
+    width: fit-content;
+    font-size: 0.9rem;
+}
+
+.nome-receita{
+    text-align: center;
+    gap: 20px;
+}
+.nome-receita > h3{
+    width: 100%;
+    background-color: #9c4cec;    
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    color: #ffffff;
+}
+
+.ingredientes{
+ text-align: center;
+}
+
+.ingredientes > h3{
+    width: 100%;
+    background-color: #9c4cec;   
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    justify-content: end;
+    color: #f0eded;
+   
+}
+
+.preparo > h3{
+    width: 100%;
+    background-color: #9c4cec;
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    justify-content: end;
+    color: #f0eded;
+
+}
+
+
+
+

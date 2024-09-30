@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/inicio.css" />
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+    <title>Receitas | CodeSnap</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Sidebar Section -->
+      <aside>
+        <div class="toggle">
+          <div class="logo">
+            <img src="../images/logo.png" />
+            <h2><span class="danger">RECEITAS!</span></h2>
+          </div>
+          <div class="close" id="close-btn">
+            <span class="material-icons-sharp"> close </span>
+          </div>
+        </div>
+
+        <div class="sidebar">
+          <a href="inicio.html">
+            <span class="material-icons-sharp"> home </span>
+            <h3>Ínicio</h3>
+          </a>
+          <a href="Listar.html">
+            <span class="material-icons-sharp"> dashboard </span>
+            <h3>Receitas</h3>
+          </a>
+          <a href="adicionar.html">
+            <span class="material-icons-sharp"> add </span>
+            <h3>Adicionar receita</h3>
+          </a>
+          <a href="signin.html">
+            <span class="material-icons-sharp"> logout </span>
+            <h3>Sair</h3>
+          </a>
+        </div>
+      </aside>
+      <main>
+        <section class="flexb">
+          <div id="receitas-list">
+            <div class="card" data-category="almoco"></div>
+            <div class="card" data-category="jantar"></div>
+            <div class="card" data-category="sobremesa"></div>
+          </div>
+        </section>
+        <!-- Aqi a gente vai add as receitas-->
+
+        <script>
+          function filterCategory(category) {
+            const cards = document.querySelectorAll(".card");
+
+            cards.forEach((card) => {
+              if (category === "all") {
+                card.style.display = "block";
+              } else {
+                card.style.display =
+                  card.getAttribute("data-category") === category
+                    ? "block"
+                    : "none";
+              }
+            });
+          }
+
+          document.querySelectorAll("#categoryItem").forEach((button) => {
+            button.addEventListener("click", () => {
+              filterCategory(button.getAttribute("category"));
+            });
+          });
+        </script>
+
+        <script>
+          const firebaseConfig = {
+            apiKey: "AIzaSyAIBSPeCOHjCj-nl-GjYCB1exuEIbrZahE",
+            authDomain: "receitas-f30ab.firebaseapp.com",
+            databaseURL: "https://receitas-f30ab-default-rtdb.firebaseio.com",
+            projectId: "receitas-f30ab",
+            storageBucket: "receitas-f30ab.appspot.com",
+            messagingSenderId: "617335034773",
+            appId: "1:617335034773:web:bfe57b6868c77b99ea9c9c",
+          };
+
+          const app = firebase.initializeApp(firebaseConfig);
+          const database = firebase.database();
+          const storage = firebase.storage();
+
+          function loadReceitas(category) {
+            let receitasRef = database.ref("receitas/");
+
+            if (category !== "all") {
+              receitasRef = receitasRef
+                .orderByChild("categoria")
+                .equalTo(category);
+            }
+
+            receitasRef.on("value", (snapshot) => {
+              const receitasList = document.getElementById("receitas-list");
+              receitasList.innerHTML = "";
+
+              snapshot.forEach((childSnapshot) => {
+                const receita = childSnapshot.val();
+
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `
+                            <section class="flex">
+                                <div class="card">                
+                                    <img src="${receita.imagem}" alt="${receita.nome}">
+                                    <h3>${receita.nome}</h3>
+                                    <p>${receita.descricao}</p>
+                                    <a href="listar.html?id=ID_DA_RECEITA">
+                                    <button class="saiba-mais">Vizualizar!</button></a>
+                                    
+                                </div>
+                            </section>
+                        `;
+                receitasList.appendChild(card);
+              });
+            });
+          }
+
+          document.querySelectorAll("#categoryItem").forEach((button) => {
+            button.addEventListener("click", () => {
+              const category = button.getAttribute("category");
+              loadReceitas(category);
+            });
+          });
+
+          loadReceitas("all");
+          loadReceitas();
+        </script>
+      </main>
+    </div>
+
+    <script src="orders.js"></script>
+    <script src="index.js"></script>
+  </body>
+</html>

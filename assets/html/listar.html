@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Receitas!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/listar.css" />
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Minhas Receitas</h1>
+    </header>
+
+    <div class="main">
+      <button onclick="loadReceitas('all')" id="categoryItem" category="all">
+        Todos
+      </button>
+      <button
+        onclick="loadReceitas('almoco')"
+        id="categoryItem"
+        category="almoco"
+      >
+        Almoço
+      </button>
+      <button
+        onclick="loadReceitas('jantar')"
+        id="categoryItem"
+        category="jantar"
+      >
+        Jantar
+      </button>
+      <button
+        onclick="loadReceitas('sobremesa')"
+        id="categoryItem"
+        category="sobremesa"
+      >
+        Sobremesa
+      </button>
+    </div>
+
+    <section class="flexb">
+      <div id="receitas-list">
+        <div class="card" data-category="almoco"></div>
+        <div class="card" data-category="jantar"></div>
+        <div class="card" data-category="sobremesa"></div>
+      </div>
+    </section>
+
+    <div class="detalhes" id="detalhes-receita" style="display: none">
+      <div class="nome-receita">
+        <h2 id="nome-receita"></h2>
+      </div>
+      <div id="ingredientes">
+        <h3>Ingredientes:</h3>
+        <p id="ingredientes-receita"></p>
+      </div>
+      <div id="preparo">
+        <h3>Modo de Preparo:</h3>
+        <p id="modo-preparo-receita"></p>
+      </div>
+      <button onclick="fecharDetalhes()">Fechar</button>
+    </div>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAIBSPeCOHjCj-nl-GjYCB1exuEIbrZahE",
+        authDomain: "receitas-f30ab.firebaseapp.com",
+        databaseURL: "https://receitas-f30ab-default-rtdb.firebaseio.com",
+        projectId: "receitas-f30ab",
+        storageBucket: "receitas-f30ab.appspot.com",
+        messagingSenderId: "617335034773",
+        appId: "1:617335034773:web:bfe57b6868c77b99ea9c9c",
+      };
+
+      const app = firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+
+      function loadReceitas(category) {
+        let receitasRef = database.ref("receitas/");
+        // Se a categoria for diferente de "all", filtrar por categoria
+        if (category !== "all") {
+          receitasRef = receitasRef.orderByChild("categoria").equalTo(category);
+        }
+        receitasRef.on("value", (snapshot) => {
+          const receitasList = document.getElementById("receitas-list");
+          receitasList.innerHTML = ""; // Limpa a lista atual de receitas
+          snapshot.forEach((childSnapshot) => {
+            const receita = childSnapshot.val();
+            // Cria um card para cada receita e adiciona à lista
+            const card = document.createElement("div");
+            card.className = "card";
+            card.innerHTML = `
+                    <section class="flex">
+                        <div class="card">                
+                            <img src="${receita.imagem}" alt="${receita.nome}">
+                            <h3>${receita.nome}</h3>
+                            <p>${receita.descricao}</p>
+                            <button class="vizualizar" onclick="visualizarDetalhes('${childSnapshot.key}')">Vizualizar!</button>
+                            <button class="excluir" onclick="excluirReceita('${childSnapshot.key}')">Excluir</button>
+                    </section>
+                `;
+            receitasList.appendChild(card);
+          });
+        });
+      }
+
+      function visualizarDetalhes(receitaId) {
+        const receitaRef = database.ref(`receitas/${receitaId}`);
+        receitaRef.once("value").then((snapshot) => {
+          const receita = snapshot.val();
+          document.getElementById("nome-receita").innerText = receita.nome;
+          document.getElementById("ingredientes-receita").innerText =
+            receita.ingredientes;
+          document.getElementById("modo-preparo-receita").innerText =
+            receita.receita;
+          document.getElementById("detalhes-receita").style.display = "block";
+        });
+      }
+
+      function fecharDetalhes() {
+        document.getElementById("detalhes-receita").style.display = "none";
+      }
+
+      function excluirReceita(receitaId) {
+        const confirmDelete = confirm(
+          "Tem certeza que deseja excluir essa receita?"
+        );
+        if (confirmDelete) {
+          database
+            .ref(`receitas/${receitaId}`)
+            .remove()
+            .then(() => {
+              alert("Receita excluída com sucesso!");
+              loadReceitas("all");
+            })
+            .catch((error) => {
+              console.error("Erro ao excluir receita!", error);
+            });
+        }
+      }
+
+      loadReceitas("all");
+    </script>
+  </body>
+</html>
