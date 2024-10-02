@@ -44,6 +44,46 @@ header {
     
 }
 
+a{
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: var(--color-info-dark);
+    height: 3.7rem;
+    gap: 1rem;
+    position: relative;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    transition: all 0.3s ease;
+}
+
+a.active{
+    width: 100%;
+    color: var(--color-primary);
+    background-color: var(--color-light);
+    margin-left: 0;
+}
+
+a.active::before{
+    content: '';
+    width: 6px;
+    height: 18px;
+    background-color: var(--color-primary);
+}
+
+
+a.active span{
+    color: var(--color-primary);
+    margin-left: calc(1rem - 3px);
+}
+a:hover span{
+    margin-bottom: 0.6rem;
+}
+
+a:hover{
+    color: var(--color-primary);
+}
+
 h1{
     font-weight: 900;
 }
@@ -114,19 +154,19 @@ img{
  
 }
 .flex {  
-    display: flex;/* Dispor os itens em linha */
-    justify-content: space-between;/* Espaçamento entre os cards */
-    flex-wrap: wrap;/* Faz os itens quebrarem linha se não couberem */
-    gap: 10px;/* Espaçamento entre os cards */
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
     margin: 0 auto;
     
 }
 .card {
-    margin: 15px;          /* Faz com que os cards se expandam igualmente */
-    flex-wrap: wrap;        /* Define a largura mínima dos cards */
-    max-width: 250px;           /* Define uma largura máxima */
-    background-color: #bbbbbbd8; /* Cor de fundo dos cards */
-    padding: 2px;             /* Espaçamento interno */
+    margin: 15px;      
+    flex-wrap: wrap;    
+    max-width: 250px;      
+    background-color: #bbbbbbd8; 
+    padding: 2px;     
     border-radius: 20px;      
     text-align: center;
 }
@@ -151,17 +191,17 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Ajusta a altura do contêiner */
+    height: 100vh; 
     text-align: center;
     padding-top: 0px ;
 }
 
 #detalhes-receita.detalhes {
-    margin: 15px;          /* Faz com que os cards se expandam igualmente */
-    flex-wrap: wrap;        /* Define a largura mínima dos cards */
-    max-width: 600px;           /* Define uma largura máxima */
-    background-color: #bbbbbbd8; /* Cor de fundo dos cards */
-    padding: 2px;             /* Espaçamento interno */
+    margin: 15px;  
+    flex-wrap: wrap;    
+    max-width: 600px;          
+    background-color: #bbbbbbd8; 
+    padding: 2px;
     border-radius: 20px;      
     text-align: center;
     justify-content: center;
@@ -222,7 +262,3 @@ p#ingredientes-receita, p#modo-preparo-receita{
     color: #f0eded;
 
 }
-
-
-
-
