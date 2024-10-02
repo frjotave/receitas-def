@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&display=swap"
-      rel="stylesheet"
-    />
+    href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
+    rel="stylesheet"
+  />
     <link rel="stylesheet" href="../css/listar.css" />
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
@@ -21,6 +21,10 @@
     </header>
 
     <div class="main">
+      <a href="inicio.html">
+        <span class="material-icons-sharp"> arrow_back </span>
+        <h6>Voltar</h6>
+      </a>
       <button onclick="loadReceitas('all')" id="categoryItem" category="all">
         Todos
       </button>
@@ -86,16 +90,14 @@
 
       function loadReceitas(category) {
         let receitasRef = database.ref("receitas/");
-        // Se a categoria for diferente de "all", filtrar por categoria
         if (category !== "all") {
           receitasRef = receitasRef.orderByChild("categoria").equalTo(category);
         }
         receitasRef.on("value", (snapshot) => {
           const receitasList = document.getElementById("receitas-list");
-          receitasList.innerHTML = ""; // Limpa a lista atual de receitas
+          receitasList.innerHTML = ""; 
           snapshot.forEach((childSnapshot) => {
             const receita = childSnapshot.val();
-            // Cria um card para cada receita e adiciona à lista
             const card = document.createElement("div");
             card.className = "card";
             card.innerHTML = `
