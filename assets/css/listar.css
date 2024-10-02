@@ -55,6 +55,8 @@ a{
     margin-left: 2rem;
     margin-right: 2rem;
     transition: all 0.3s ease;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 a.active{
@@ -162,21 +164,19 @@ img{
     
 }
 .card {
-    margin: 15px;      
-    flex-wrap: wrap;    
-    max-width: 250px;      
-    background-color: #bbbbbbd8; 
-    padding: 2px;     
+    margin: 15px;   
+    flex-wrap: wrap;     
+    max-width: 250px;       
+    background-color: #bbbbbbd8;
+    padding: 2px;       
     border-radius: 20px;      
     text-align: center;
 }
-
 .card > h3 {
     font-weight: 800;
     font-size: 1.4rem;
     color: var(--color-primary);
 }
-
 .card > button{
     background-color: #5664b8;
     border-radius: 20px;
@@ -184,29 +184,25 @@ img{
     color: #ffffff;
     width: 90px;
     height: 30px;
-  
 }
-
 .detalhes {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; 
+    height: 100vh; /* Ajusta a altura do contêiner */
     text-align: center;
     padding-top: 0px ;
 }
-
 #detalhes-receita.detalhes {
-    margin: 15px;  
-    flex-wrap: wrap;    
-    max-width: 600px;          
-    background-color: #bbbbbbd8; 
-    padding: 2px;
+    margin: 15px;          /* Faz com que os cards se expandam igualmente */
+    flex-wrap: wrap;        /* Define a largura mínima dos cards */
+    max-width: 600px;           /* Define uma largura máxima */
+    background-color: #bbbbbbd8; /* Cor de fundo dos cards */
+    padding: 2px;             /* Espaçamento interno */
     border-radius: 20px;      
     text-align: center;
     justify-content: center;
 }
-
 h2#nome-receita{
     width: 100%;
     font-size: 1.2rem;
@@ -217,13 +213,11 @@ h2#nome-receita{
     display: block;
     color: var(--color-primary);
 }
-
 p#ingredientes-receita, p#modo-preparo-receita{
     text-align: justify;
     width: fit-content;
     font-size: 0.9rem;
 }
-
 .nome-receita{
     text-align: center;
     gap: 20px;
@@ -236,11 +230,9 @@ p#ingredientes-receita, p#modo-preparo-receita{
     display: block;
     color: #ffffff;
 }
-
 .ingredientes{
  text-align: center;
 }
-
 .ingredientes > h3{
     width: 100%;
     background-color: #9c4cec;   
@@ -251,7 +243,6 @@ p#ingredientes-receita, p#modo-preparo-receita{
     color: #f0eded;
    
 }
-
 .preparo > h3{
     width: 100%;
     background-color: #9c4cec;
