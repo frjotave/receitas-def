@@ -377,11 +377,7 @@ h4{
     height: 40px;
     border-radius: 20px;
 }
-
-
-
-
-/* Media queries para telas menores (tablets) */
+/*tablet*/
 @media (max-width: 1022px) {
     #inputNome, #inputDescricao, #inputIngredientes, #inputReceita {
         width: 100%;
@@ -392,28 +388,24 @@ h4{
         padding-top: 1200px;
     }
 }
-
-/* Media queries para celulares */
+/*celular*/
 @media (max-width: 600px) {
     #inputNome, #inputDescricao, #inputIngredientes, #inputReceita {
         width: 100%;
         grid-template-rows: 50px 50px 50px 1fr 50px 50px 50px;
         grid-template-columns: 1fr;
     }
-
     .main {
         flex-direction: column;
         padding-top: 600px;
         grid-template-rows: 50px 50px 50px 1fr 50px 50px 50px;
         grid-template-columns: 1fr;
     }
-
     .receita, .descricao, .ingredientes, .preparo, .imagem {
         margin: 20px;
         grid-template-rows: 50px 50px 50px 1fr 50px 50px 50px;
         grid-template-columns: 1fr;
     }
-
     button {
         width: 100%;
     }
