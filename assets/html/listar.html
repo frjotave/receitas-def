@@ -19,7 +19,7 @@
     <header>
       <h1>Minhas Receitas</h1>
     </header>
-    
+
     <div class="main">
       <a href="inicio.html">
         <span class="material-icons-sharp"> arrow_back </span>
@@ -95,10 +95,9 @@
         }
         receitasRef.on("value", (snapshot) => {
           const receitasList = document.getElementById("receitas-list");
-          receitasList.innerHTML = ""; // Limpa a lista atual de receitas
+          receitasList.innerHTML = ""; 
           snapshot.forEach((childSnapshot) => {
             const receita = childSnapshot.val();
-            // Cria um card para cada receita e adiciona à lista
             const card = document.createElement("div");
             card.className = "card";
             card.innerHTML = `
@@ -115,6 +114,7 @@
           });
         });
       }
+
       function visualizarDetalhes(receitaId) {
         const receitaRef = database.ref(`receitas/${receitaId}`);
         receitaRef.once("value").then((snapshot) => {
@@ -127,9 +127,11 @@
           document.getElementById("detalhes-receita").style.display = "block";
         });
       }
+
       function fecharDetalhes() {
         document.getElementById("detalhes-receita").style.display = "none";
       }
+
       function excluirReceita(receitaId) {
         const confirmDelete = confirm(
           "Tem certeza que deseja excluir essa receita?"
@@ -147,6 +149,7 @@
             });
         }
       }
+
       loadReceitas("all");
     </script>
   </body>
