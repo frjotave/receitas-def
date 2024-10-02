@@ -16,7 +16,6 @@
 
   <body>
     <div class="container">
-      <!-- Sidebar Section -->
       <aside>
         <div class="toggle">
           <div class="logo">
@@ -101,7 +100,6 @@
     </div>
 
     <script>
-      // Configuração do Firebase
       const firebaseConfig = {
         apiKey: "AIzaSyAIBSPeCOHjCj-nl-GjYCB1exuEIbrZahE",
         authDomain: "receitas-f30ab.firebaseapp.com",
@@ -111,11 +109,9 @@
         messagingSenderId: "617335034773",
         appId: "1:617335034773:web:bfe57b6868c77b99ea9c9c",
       };
-      // Inicializando o Firebase
       const app = firebase.initializeApp(firebaseConfig);
-      const database = firebase.database(); // Definindo a referência ao banco de dados
-      const storage = firebase.storage(); // Definindo a referência ao Firebase Storage
-      // Função para enviar os dados do formulário
+      const database = firebase.database(); 
+      const storage = firebase.storage();
       document
         .getElementById("receita-cad")
         .addEventListener("submit", function (e) {
@@ -127,28 +123,26 @@
             document.getElementById("inputIngredientes").value;
           const receita = document.getElementById("inputReceita").value;
           const imagemFile = document.getElementById("inputImagem").files[0];
-          // Cria uma referência para o arquivo no Firebase Storage
           const storageRef = storage.ref("imagens/" + imagemFile.name);
           storageRef
             .put(imagemFile)
             .then((snapshot) => {
-              return snapshot.ref.getDownloadURL(); // Obtém a URL da imagem
+              return snapshot.ref.getDownloadURL(); 
             })
             .then((url) => {
-              // Salvar dados no Realtime Database
               return database.ref("receitas/").push({
                 nome: nome,
                 descricao: descricao,
                 categoria: categoria,
                 ingredientes: ingredientes,
                 receita: receita,
-                imagem: url, // Salva a URL da imagem
+                imagem: url,
               });
             })
             .then(() => {
               alert("Dados salvos com sucesso!");
               document.getElementById("receita-cad").reset();
-              loadReceitas(); // Carregar receitas após adicionar uma nova
+              loadReceitas();
             })
             .catch((error) => {
               console.error("Erro ao salvar dados:", error);
