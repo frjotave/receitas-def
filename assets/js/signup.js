@@ -15,7 +15,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-
 const usuario = document.querySelector('#usuario');
 const email = document.querySelector('#email');
 const senha = document.querySelector('#senha');
@@ -30,8 +29,9 @@ let validUsuario = false;
 let validSenha = false;
 let validConfirmSenha = false;
 
+
 usuario.addEventListener('keyup', () => {
-    if (usuario.value.length <= 4) {
+    if (usuario.value.length < 5) {
         labelUsuario.style.color = 'red';
         labelUsuario.innerHTML = 'Usuário *Insira no mínimo 5 caracteres';
         usuario.style.borderColor = 'red';
@@ -44,8 +44,9 @@ usuario.addEventListener('keyup', () => {
     }
 });
 
+
 senha.addEventListener('keyup', () => {
-    if (senha.value.length <= 5) {
+    if (senha.value.length < 6) {
         labelSenha.style.color = 'red';
         labelSenha.innerHTML = 'Senha *Insira no mínimo 6 caracteres';
         senha.style.borderColor = 'red';
@@ -103,17 +104,21 @@ async function cadastrar() {
         msgError.innerText = `Erro: ${error.message}`;
         msgError.style.display = 'block';
         msgSuccess.style.display = 'none';
+
+
+        console.error("Erro ao cadastrar:", error);
     }
 }
 
 
 document.querySelector('.justify-center button').addEventListener('click', cadastrar);
 
-// Mostrar/Ocultar Senha
-document.querySelector('#verConfirmSenha').addEventListener('click', () => {
+
+document.querySelector('#verSenha').addEventListener('click', () => {
     const inputSenha = document.querySelector('#senha');
     inputSenha.type = inputSenha.type === 'password' ? 'text' : 'password';
 });
+
 
 document.querySelector('#verConfirmSenha').addEventListener('click', () => {
     const inputConfirmSenha = document.querySelector('#confirmSenha');
